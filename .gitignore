@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Índice de embeddings gerado (rode: npm run embeddings)
+src/knowledge_base/kb_index.json
+
+# Scratch (apagar)
+_to_delete/

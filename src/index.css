@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-magalu-blue: #0086FF;
+  --color-magalu-magenta: #E4004B;
+  --color-magalu-bg: #F7F8FA;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-magalu-bg);
+  color: #333333;
+}
