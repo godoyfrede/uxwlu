@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 Z" fill="#8f8f8f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="500" fill="#ffffff"/>
+
+  <text x="55" y="42" fill="#6a6a6a" font-size="18" font-weight="bold">1 · Ingestão — offline, roda quando a base .md muda</text>
+
+  <rect x="55"  y="60" width="250" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="180" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Fontes</text>
+  <text x="180" y="128" text-anchor="middle" fill="#b9b9b9" font-size="14">voz · glossário · microcopy</text>
+
+  <rect x="335" y="60" width="250" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="460" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Chunking</text>
+  <text x="460" y="128" text-anchor="middle" fill="#b9b9b9" font-size="14">44 blocos + metadados</text>
+
+  <rect x="615" y="60" width="250" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="740" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Embeddings</text>
+  <text x="740" y="128" text-anchor="middle" fill="#b9b9b9" font-size="14">endpoint interno</text>
+
+  <rect x="895" y="60" width="250" height="90" rx="12" fill="#15568f"/>
+  <text x="1020" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Índice vetorial</text>
+  <text x="1020" y="128" text-anchor="middle" fill="#cfe0f0" font-size="14">kb_index.json</text>
+
+  <path d="M305,105 H331" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M585,105 H611" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M865,105 H891" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <path d="M1020,150 V250 H368 V336" stroke="#a9a9a9" stroke-width="2.5" fill="none" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+  <text x="694" y="242" text-anchor="middle" fill="#a9a9a9" font-size="14">contexto recuperado (cosseno, top-k)</text>
+
+  <text x="31" y="322" fill="#6a6a6a" font-size="18" font-weight="bold">2 · Consulta — online, a cada pedido</text>
+
+  <rect x="31"  y="340" width="210" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="136" y="382" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">Texto do usuário</text>
+  <text x="136" y="407" text-anchor="middle" fill="#b9b9b9" font-size="14">gerar · revisar</text>
+
+  <rect x="263" y="340" width="210" height="90" rx="12" fill="#15568f"/>
+  <text x="368" y="382" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">Recuperação</text>
+  <text x="368" y="407" text-anchor="middle" fill="#cfe0f0" font-size="14">embedding + top-k</text>
+
+  <rect x="495" y="340" width="210" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="600" y="382" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">Monta prompt</text>
+  <text x="600" y="407" text-anchor="middle" fill="#b9b9b9" font-size="14">sistema + contexto</text>
+
+  <rect x="727" y="340" width="210" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="832" y="382" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">Gemma</text>
+  <text x="832" y="407" text-anchor="middle" fill="#b9b9b9" font-size="14">gemma-4-e4b-it</text>
+
+  <rect x="959" y="340" width="210" height="90" rx="12" fill="#3f3f3f"/>
+  <text x="1064" y="382" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">Saída JSON</text>
+  <text x="1064" y="407" text-anchor="middle" fill="#b9b9b9" font-size="14">cards na UI</text>
+
+  <path d="M241,385 H259" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M473,385 H491" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M705,385 H723" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M937,385 H955" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+</svg>

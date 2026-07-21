@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 Z" fill="#8f8f8f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="820" fill="#ffffff"/>
+
+  <!-- Clientes -->
+  <rect x="60"  y="40" width="300" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="210" y="93" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">App web</text>
+  <rect x="450" y="40" width="300" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="93" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Plugin Figma</text>
+  <rect x="840" y="40" width="300" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="990" y="93" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Extensão Chrome</text>
+
+  <path d="M210,130 V175" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M990,130 V175" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M210,175 H990" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M600,175 V206" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- API / BFF -->
+  <rect x="350" y="210" width="500" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">API / BFF</text>
+  <text x="600" y="280" text-anchor="middle" fill="#b9b9b9" font-size="16">auth · rate limit · cache</text>
+
+  <path d="M600,300 V356" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- Orquestrador (destaque) -->
+  <rect x="220" y="360" width="760" height="110" rx="14" fill="#15568f"/>
+  <text x="600" y="412" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="bold">Orquestrador do copilot</text>
+  <text x="600" y="444" text-anchor="middle" fill="#cfe0f0" font-size="16">roteador de intenção · prompts por tarefa · guardrails · saída estruturada</text>
+
+  <path d="M600,470 V515" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M340,515 H860" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M340,515 V556" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M860,515 V556" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- Base de conhecimento + Serviço do modelo -->
+  <rect x="140" y="560" width="400" height="110" rx="14" fill="#3f3f3f"/>
+  <text x="340" y="612" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Base de conhecimento (RAG)</text>
+  <text x="340" y="644" text-anchor="middle" fill="#b9b9b9" font-size="16">tom de voz · glossário · vetores</text>
+
+  <rect x="660" y="560" width="400" height="110" rx="14" fill="#3f3f3f"/>
+  <text x="860" y="612" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Serviço do modelo</text>
+  <text x="860" y="644" text-anchor="middle" fill="#b9b9b9" font-size="16">Gemma multimodal · endpoint interno</text>
+
+  <path d="M340,670 V696" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M860,670 V696" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- Dados & observabilidade -->
+  <rect x="240" y="700" width="720" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="740" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Dados &amp; observabilidade</text>
+  <text x="600" y="770" text-anchor="middle" fill="#b9b9b9" font-size="16">Postgres · logs · avaliação · dataset de feedback</text>
+
+  <!-- Feedback loop -->
+  <path d="M240,745 H60 V415 H214" stroke="#a9a9a9" stroke-width="2.5" fill="none" stroke-dasharray="7 5" marker-end="url(#ah)"/>
+  <text x="70" y="405" fill="#a9a9a9" font-size="16">feedback</text>
+</svg>

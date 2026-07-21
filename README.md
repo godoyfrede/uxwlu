@@ -24,6 +24,19 @@ O projeto é dividido em 4 ferramentas principais:
 
 ---
 
+## 🏗️ Arquitetura
+
+**Estado atual** — o que está de fato ligado hoje:
+
+![Estado atual do Lu Writer](./docs/arquitetura-atual.svg)
+
+O coração é o **Orquestrador**: recebe a intenção, escolhe o prompt da tarefa,
+injeta o contexto da base de conhecimento, chama o modelo e valida a saída
+estruturada. A recuperação semântica é opt-in; persistência e feedback são
+seams preparadas para a v2 (inativas). A **arquitetura-alvo (conceitual)** e a
+documentação técnica completa — estrutura, fluxo de dados, RAG, configuração e
+roadmap — estão em **[`docs/ARQUITETURA.md`](./docs/ARQUITETURA.md)**.
+
 ## 🛠️ Stack Tecnológica
 
 O projeto adota uma arquitetura Full-Stack servida e empacotada de maneira unificada:

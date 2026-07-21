@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+      <path d="M0,0 L8,5 L0,10 Z" fill="#8f8f8f"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="840" fill="#ffffff"/>
+
+  <text x="60" y="34" fill="#3f3f3f" font-size="20" font-weight="bold">Lu Writer — estado atual (o que está ligado hoje)</text>
+  <text x="60" y="58" fill="#8a8a8a" font-size="14">linha sólida = ativo   ·   caixa tracejada = preparado, inativo (v2)</text>
+
+  <!-- App web -->
+  <rect x="450" y="80" width="300" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="120" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">App web</text>
+  <text x="600" y="148" text-anchor="middle" fill="#b9b9b9" font-size="15">React + Vite</text>
+  <path d="M600,170 V226" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- API / BFF -->
+  <rect x="400" y="230" width="400" height="90" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="270" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">API / BFF</text>
+  <text x="600" y="298" text-anchor="middle" fill="#b9b9b9" font-size="15">Express · proxy seguro (chave no servidor)</text>
+  <path d="M600,320 V376" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- Orquestrador -->
+  <rect x="220" y="380" width="760" height="110" rx="14" fill="#15568f"/>
+  <text x="600" y="432" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="bold">Orquestrador do copilot</text>
+  <text x="600" y="464" text-anchor="middle" fill="#cfe0f0" font-size="15">controllers · ai.service · prompts por tarefa · validação · saída estruturada (JSON)</text>
+
+  <path d="M600,490 V535" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M230,535 H970" stroke="#8f8f8f" stroke-width="2.5" fill="none"/>
+  <path d="M230,535 V576" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M600,535 V576" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+  <path d="M970,535 V576" stroke="#8f8f8f" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+
+  <!-- Três saídas ativas -->
+  <rect x="60"  y="580" width="340" height="110" rx="14" fill="#3f3f3f"/>
+  <text x="230" y="628" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="bold">Base de conhecimento</text>
+  <text x="230" y="656" text-anchor="middle" fill="#b9b9b9" font-size="14">.md → chunks · injeção completa (padrão)</text>
+
+  <rect x="430" y="580" width="340" height="110" rx="14" fill="#3f3f3f"/>
+  <text x="600" y="628" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="bold">Serviço do modelo</text>
+  <text x="600" y="656" text-anchor="middle" fill="#b9b9b9" font-size="14">Gemma · endpoint interno</text>
+
+  <rect x="800" y="580" width="340" height="110" rx="14" fill="#3f3f3f"/>
+  <text x="970" y="628" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="bold">Observabilidade</text>
+  <text x="970" y="656" text-anchor="middle" fill="#b9b9b9" font-size="14">logs estruturados (JSON)</text>
+
+  <!-- v2 preparado (inativo) -->
+  <rect x="350" y="740" width="500" height="72" rx="14" fill="#ffffff" stroke="#b0b0b0" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="600" y="775" text-anchor="middle" fill="#8a8a8a" font-size="19" font-weight="bold">Persistência &amp; feedback</text>
+  <text x="600" y="798" text-anchor="middle" fill="#a9a9a9" font-size="14">v2 — seams prontas, sem banco ligado</text>
+
+  <!-- índice semântico opt-in (nota) -->
+  <text x="230" y="712" text-anchor="middle" fill="#8a8a8a" font-size="13">semântico (embeddings) = opt-in</text>
+</svg>
