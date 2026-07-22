@@ -13,7 +13,10 @@ export type ChunkTipo =
   | "regra_capitalizacao"
   | "de_para"
   | "inconsistencia"
-  | "glossario";
+  | "glossario"
+  | "glossario_marca"
+  | "situacao"
+  | "diretriz";
 
 export interface KnowledgeChunk {
   /** id estável, usado como chave para embeddings/citação. */
@@ -26,6 +29,8 @@ export interface KnowledgeChunk {
   pilar?: string;
   fonte?: string;
   padrao?: string;
+  /** intenção/situação (biblioteca de situações), além da categoria. */
+  situacao?: string;
 }
 
 function slug(s: string): string {
@@ -232,4 +237,113 @@ export function formatChunks(chunks: KnowledgeChunk[]): string {
       return `--- [${meta}] ---\n${c.texto}`;
     })
     .join("\n\n");
+}
+
+// ===========================================================================
+// Parsers para os arquivos de tabela (glossário de marca, situações) e para
+// as diretrizes (por seção). Ignoram linhas de placeholder (⟨...⟩) e vazias.
+// ===========================================================================
+
+function splitRow(line: string): string[] {
+  return line.trim().replace(/^\|/, "").replace(/\|\s*$/, "").split("|").map((c) => c.trim());
+}
+
+function isPlaceholderRow(cells: string[]): boolean {
+  const joined = cells.join("").trim();
+  if (!joined) return true;
+  if (cells.some((c) => c.includes("⟨"))) return true;
+  return false;
+}
+
+interface ParsedTable {
+  headers: string[];
+  rows: string[][];
+}
+
+function parseMarkdownTables(md: string): ParsedTable[] {
+  const lines = stripFrontmatter(md).split("\n");
+  const tables: ParsedTable[] = [];
+  let i = 0;
+  while (i < lines.length) {
+    const isRow = /^\s*\|/.test(lines[i]);
+    const nextIsSep =
+      i + 1 < lines.length && /^\s*\|?[\s:|-]*-[\s:|-]*\|/.test(lines[i + 1]);
+    if (isRow && nextIsSep) {
+      const headers = splitRow(lines[i]);
+      i += 2;
+      const rows: string[][] = [];
+      while (i < lines.length && /^\s*\|/.test(lines[i])) {
+        rows.push(splitRow(lines[i]));
+        i++;
+      }
+      tables.push({ headers, rows });
+    } else {
+      i++;
+    }
+  }
+  return tables;
+}
+
+/** Glossário de marca: um chunk por termo. */
+export function parseGlossarioMarca(md: string): KnowledgeChunk[] {
+  const tables = parseMarkdownTables(md);
+  const t = tables.find((x) => x.headers.some((h) => /termo/i.test(h))) || tables[0];
+  if (!t) return [];
+  const chunks: KnowledgeChunk[] = [];
+  for (const row of t.rows) {
+    if (isPlaceholderRow(row)) continue;
+    const [termo, tipo, ok, evite, quando, fonte] = row;
+    if (!termo) continue;
+    chunks.push({
+      id: "gmarca-" + slug(termo),
+      tipo: "glossario_marca",
+      categoria: tipo || undefined,
+      fonte: fonte || undefined,
+      titulo: termo,
+      texto: `${termo}${tipo ? " (" + tipo + ")" : ""}. Grafia correta: ${ok}. Evite: ${evite}. Quando usar: ${quando}.`,
+    });
+  }
+  return chunks;
+}
+
+/** Biblioteca de situações: um chunk por situação/intenção. */
+export function parseSituacoes(md: string): KnowledgeChunk[] {
+  const tables = parseMarkdownTables(md);
+  const t = tables.find((x) => x.headers.some((h) => /situa/i.test(h))) || tables[0];
+  if (!t) return [];
+  const chunks: KnowledgeChunk[] = [];
+  for (const row of t.rows) {
+    if (isPlaceholderRow(row)) continue;
+    const [situacao, categoria, pilar, variacoes, evite, obs, fonte] = row;
+    if (!situacao) continue;
+    chunks.push({
+      id: "situacao-" + slug(situacao),
+      tipo: "situacao",
+      situacao,
+      categoria: categoria || undefined,
+      pilar: pilar || undefined,
+      fonte: fonte || undefined,
+      titulo: situacao,
+      texto: `Situação: ${situacao}${pilar ? " (pilar: " + pilar + ")" : ""}. Use: ${variacoes}. Evite: ${evite}.${obs ? " " + obs : ""}`,
+    });
+  }
+  return chunks;
+}
+
+/** Diretrizes de conteúdo: um chunk por seção de nível ##. */
+export function parseDiretrizes(md: string): KnowledgeChunk[] {
+  const body = stripFrontmatter(md);
+  const chunks: KnowledgeChunk[] = [];
+  for (const part of body.split(/\n## /).slice(1)) {
+    const heading = part.split("\n")[0].trim();
+    if (!heading) continue;
+    chunks.push({
+      id: "diretriz-" + slug(heading),
+      tipo: "diretriz",
+      fonte: "content_system",
+      titulo: heading.replace(/^\d+\.\s*/, ""),
+      texto: ("## " + part).trim(),
+    });
+  }
+  return chunks;
 }

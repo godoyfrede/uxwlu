@@ -129,8 +129,21 @@ Legenda: ✅ pronto · ⚪ parcial · 🔜 preparado para v2.
 ## 6. Camada de conhecimento & RAG
 
 A base de conhecimento são os `.md` em `src/knowledge_base/`. Você edita só
-eles. O `knowledgeChunker.ts` os fatia automaticamente em **44 blocos** com
-metadados (`categoria`, `pilar`, `fonte`), derivados da estrutura existente.
+eles. O `knowledgeChunker.ts` os fatia automaticamente em **138 blocos** com
+metadados (`categoria`, `pilar`, `fonte`, `situação`), derivados da estrutura
+de cada arquivo:
+
+| Arquivo | Conteúdo | Chunks |
+|---|---|---|
+| `lu_writer_system_prompt.md` | Identidade, pilares, modos, exceções | (system prompt) |
+| `magalu_content_writing_dataset.md` | Regras de capitalização, De/Para, inconsistências | 44 |
+| `magalu_glossario.md` | Glossário financeiro (Vertical Seller) | 19 |
+| `magalu_glossario_marca.md` | Grafia oficial de termos/marcas/selos + léxico | 42 |
+| `magalu_situacoes.md` | Copy por intenção/situação | 46 |
+| `magalu_diretrizes_conteudo.md` | Acessibilidade, inclusão, linguagem simples/antirracista/neutra | 6 |
+
+A injeção completa (`RAG_MODE=full`) inclui todos, **exceto** a biblioteca de
+situações (grande e orientada a exemplos), que entra pela recuperação semântica.
 
 Há três estratégias de contexto, em ordem de sofisticação:
 
@@ -220,9 +233,11 @@ Lista completa em `.env.example`.
   `retrieve.fallback_keyword`, `lint.done`, …) — pronto para Cloud Run/coletor.
 - **Validação de saída** em runtime protege independentemente de o endpoint
   suportar `strict` outputs.
-- **`lint.ts` (`/api/lint`)** — filtro determinístico de grafia (Pix, OFF,
-  MagaluPay, Magalog, atribuição de IA) de **alta precisão**, sem chamar o LLM.
-  Ideal para pré-checar ou dar feedback enquanto o usuário digita.
+- **`lint.ts` (`/api/lint`)** — filtro determinístico de **alta precisão**, sem
+  chamar o LLM, em 3 categorias: `grafia` (Pix, OFF, MagaluPay…), `inclusiva`
+  (pessoa com deficiência, Boas-vindas…) e `antirracista` (termos a evitar do
+  Content System, com a alternativa sugerida). As regras de cor disparam só em
+  expressões (ex.: "lista negra"), nunca em cor de produto ("camiseta preta").
 
 ---
 

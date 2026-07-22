@@ -146,8 +146,17 @@ A chave `GEMINI_API_KEY` jamais é enviada ao navegador do cliente, garantindo s
 ## 🧠 Base de conhecimento & RAG
 
 A fonte de verdade são os arquivos em `src/knowledge_base/` (`.md`). Você edita
-só eles. O `knowledgeChunker.ts` os fatia automaticamente em blocos com
-metadados (`categoria`, `pilar`, `fonte`), prontos para recuperação.
+só eles. O `knowledgeChunker.ts` os fatia automaticamente em **138 blocos** com
+metadados (`categoria`, `pilar`, `fonte`, `situação`), prontos para recuperação.
+
+Arquivos da base:
+
+*   `lu_writer_system_prompt.md` — identidade, pilares, modos, exceções.
+*   `magalu_content_writing_dataset.md` — regras de capitalização, De/Para, inconsistências.
+*   `magalu_glossario.md` — glossário financeiro (Vertical Seller).
+*   `magalu_glossario_marca.md` — grafia oficial de termos, marcas, selos e léxico.
+*   `magalu_situacoes.md` — copy pronta por intenção/situação.
+*   `magalu_diretrizes_conteudo.md` — acessibilidade, inclusão, linguagem simples/antirracista/neutra.
 
 Há dois modos de alimentar o contexto do modelo, controlados por `RAG_MODE`:
 
@@ -188,7 +197,7 @@ Veja `.env.example` para a lista completa. Principais:
 | POST | `/api/generate` | Gerar variações a partir de uma intenção. |
 | POST | `/api/explain` | Explicar uma regra (didático). |
 | POST | `/api/analyze` | Analisar o texto de um print de tela. |
-| POST | `/api/lint` | Filtro determinístico de grafia (sem LLM). |
+| POST | `/api/lint` | Filtro determinístico de grafia + linguagem inclusiva e antirracista (sem LLM). |
 | POST | `/api/feedback` | Registra aceito/editado/rejeitado (seam v2). |
 | POST | `/api/figma/image` | Baixa um frame do Figma como imagem. |
 

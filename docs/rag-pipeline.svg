@@ -14,7 +14,7 @@
 
   <rect x="335" y="60" width="250" height="90" rx="12" fill="#3f3f3f"/>
   <text x="460" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Chunking</text>
-  <text x="460" y="128" text-anchor="middle" fill="#b9b9b9" font-size="14">44 blocos + metadados</text>
+  <text x="460" y="128" text-anchor="middle" fill="#b9b9b9" font-size="14">138 blocos + metadados</text>
 
   <rect x="615" y="60" width="250" height="90" rx="12" fill="#3f3f3f"/>
   <text x="740" y="102" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">Embeddings</text>

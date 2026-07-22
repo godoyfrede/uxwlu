@@ -2,6 +2,9 @@ import fs from "fs";
 import path from "path";
 import {
   parseKnowledge,
+  parseGlossarioMarca,
+  parseSituacoes,
+  parseDiretrizes,
   retrieve as retrieveChunks,
   formatChunks,
   type KnowledgeChunk,
@@ -36,6 +39,18 @@ export function getGlossary(): string {
   return readKB("magalu_glossario.md");
 }
 
+export function getGlossarioMarca(): string {
+  return readKB("magalu_glossario_marca.md");
+}
+
+export function getSituacoes(): string {
+  return readKB("magalu_situacoes.md");
+}
+
+export function getDiretrizes(): string {
+  return readKB("magalu_diretrizes_conteudo.md");
+}
+
 // --- Chunks (RAG-ready) -----------------------------------------------------
 
 let chunkCache: KnowledgeChunk[] | null = null;
@@ -43,7 +58,12 @@ let chunkCache: KnowledgeChunk[] | null = null;
 /** Base de conhecimento fatiada em blocos com metadados. Cacheado em memória. */
 export function getChunks(): KnowledgeChunk[] {
   if (!chunkCache) {
-    chunkCache = parseKnowledge(getDataset(), getGlossary());
+    chunkCache = [
+      ...parseKnowledge(getDataset(), getGlossary()),
+      ...parseGlossarioMarca(getGlossarioMarca()),
+      ...parseSituacoes(getSituacoes()),
+      ...parseDiretrizes(getDiretrizes()),
+    ];
   }
   return chunkCache;
 }
@@ -102,8 +122,18 @@ export function buildSystemInstruction(): string {
   const prompt = getSystemPrompt();
   const dataset = getDataset();
   const glossary = getGlossary();
+  const glossarioMarca = getGlossarioMarca();
+  const diretrizes = getDiretrizes();
 
-  return `${prompt}\n\n=== BASE DE CONHECIMENTO ===\n\n${dataset}\n\n=== GLOSSÁRIO ===\n\n${glossary}\n\n${GROUNDING_NOTE}`;
+  // Nota: a biblioteca de SITUAÇÕES fica fora da injeção completa (é grande e
+  // orientada a exemplos) — ela entra pela recuperação semântica (RAG_MODE=semantic).
+  return (
+    `${prompt}\n\n=== BASE DE CONHECIMENTO ===\n\n${dataset}` +
+    `\n\n=== GLOSSÁRIO (financeiro) ===\n\n${glossary}` +
+    `\n\n=== GLOSSÁRIO DE MARCA ===\n\n${glossarioMarca}` +
+    `\n\n=== DIRETRIZES DE CONTEÚDO ===\n\n${diretrizes}` +
+    `\n\n${GROUNDING_NOTE}`
+  );
 }
 
 /**
